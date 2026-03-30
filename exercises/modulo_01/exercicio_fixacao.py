@@ -19,12 +19,14 @@ Uso:
     Digite "sair" para encerrar.
 """
 
+import os
 from groq import Groq
 
 # ─────────────────────────────────────────────
 # Configuração
 # ─────────────────────────────────────────────
 client = Groq(api_key=os.getenv("GROQ_API_KEY", ""))
+              
 
 # O histórico começa com o system prompt.
 # Ele será reenviado em TODAS as chamadas — ocupa tokens de input sempre.
@@ -63,6 +65,7 @@ def chat(mensagem_usuario: str) -> str:
     # 4. Adicione a resposta do modelo ao histórico
     #    Dica: role="assistant"
     # historico.append({"role": "assistant", "content": texto_resposta})
+    # sem essa etapa, o modelo não "lembra" que já respondeu antes — cada pergunta pareceria uma conversa nova.
     # TODO
 
     # 5. Imprima os tokens usados nessa chamada
