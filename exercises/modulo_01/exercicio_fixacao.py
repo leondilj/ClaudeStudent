@@ -20,11 +20,13 @@ Uso:
 """
 
 import os
+from dotenv import load_dotenv
 from groq import Groq
 
 # ─────────────────────────────────────────────
 # Configuração
 # ─────────────────────────────────────────────
+load_dotenv()
 client = Groq(api_key=os.getenv("GROQ_API_KEY", ""))
               
 
@@ -64,7 +66,7 @@ def chat(mensagem_usuario: str) -> str:
 
     # 4. Adicione a resposta do modelo ao histórico
     #    Dica: role="assistant"
-    # historico.append({"role": "assistant", "content": texto_resposta})
+    historico.append({"role": "assistant", "content": texto_resposta})
     # sem essa etapa, o modelo não "lembra" que já respondeu antes — cada pergunta pareceria uma conversa nova.
     # TODO
 
